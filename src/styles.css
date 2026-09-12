@@ -1,3 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+:root {
+	color-scheme: light;
+	--color-primary: #087a52;
+	--color-primary-strong: #056440;
+	--color-primary-on: #ffffff;
+	--color-background: #f7f7f2;
+	--color-surface: #ffffff;
+	--color-text: #18221d;
+	--color-text-muted: #66736b;
+	--color-border: #d6ddd5;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+	--color-primary: #57d4a0;
+	--color-primary-strong: #83e5ba;
+	--color-primary-on: #10241b;
+	--color-background: #101612;
+	--color-surface: #19231d;
+	--color-text: #edf6ef;
+	--color-text-muted: #aabbb0;
+	--color-border: #34483b;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme]) {
+		color-scheme: dark;
+		--color-primary: #57d4a0;
+		--color-primary-strong: #83e5ba;
+		--color-primary-on: #10241b;
+		--color-background: #101612;
+		--color-surface: #19231d;
+		--color-text: #edf6ef;
+		--color-text-muted: #aabbb0;
+		--color-border: #34483b;
+	}
+}
+
+html, body { min-height: 100%; }
+body { margin: 0; background: var(--color-background); color: var(--color-text); }

@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from './core/theme/services/theme';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  templateUrl: './app.html',
+  template: '<router-outlet />',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('ess-fitness-center');
+  private readonly themeService = inject(ThemeService);
+
+  constructor() {
+    this.themeService.initialize();
+  }
 }

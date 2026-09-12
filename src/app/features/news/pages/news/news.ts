@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-news',
+  template: `
+    <section>
+      <p class="font-bold text-[var(--color-primary)]">ESS Fitness Center</p>
+      <h1 class="m-0">News</h1>
+      <article class="mt-8 border-t border-[var(--color-border)] pt-4">
+        <h2 class="mb-1">New classes this week</h2>
+        <p>Browse the latest updates from your fitness center.</p>
+      </article>
+    </section>
+  `
+})
+export class News {}
