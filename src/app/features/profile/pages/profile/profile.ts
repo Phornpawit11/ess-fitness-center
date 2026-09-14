@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthStore } from '../../../../core/auth/services/auth-store';
 
 @Component({
   selector: 'app-profile',
-  template: `
-    <section>
-      <p class="font-bold text-[var(--color-primary)]">ESS Fitness Center</p>
-      <h1 class="m-0">Profile</h1>
-      <p>Manage your membership and training details.</p>
-    </section>
-  `
+  templateUrl: './profile.html',
+  styleUrl: './profile.css'
 })
-export class Profile {}
+export class Profile {
+  protected readonly authStore = inject(AuthStore);
+  private readonly router = inject(Router);
+
+  protected signOut(): void {
+    this.authStore.signOut();
+    void this.router.navigateByUrl('/launcher/news');
+  }
+}

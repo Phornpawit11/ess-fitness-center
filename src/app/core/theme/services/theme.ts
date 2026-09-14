@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, inject, signal } from '@angular/core';
+import { BrowserStorage } from '../../storage/services/browser-storage';
 
 export type Theme = 'light' | 'dark';
 export enum ThemeEnum {
@@ -10,6 +11,7 @@ export enum ThemeEnum {
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly document = inject(DOCUMENT);
+  private readonly storage = inject(BrowserStorage);
   readonly theme = signal<Theme>(this.getStoredTheme() ?? this.getSystemTheme());
 
   initialize(): void {
@@ -27,7 +29,7 @@ export class ThemeService {
   set(theme: Theme): void {
     this.theme.set(theme);
     this.apply(theme);
-    localStorage.setItem('ess-theme', theme);
+    this.storage.setItem('ess-theme', theme);
   }
 
   private apply(theme: Theme): void {
@@ -35,7 +37,7 @@ export class ThemeService {
   }
 
   private getStoredTheme(): Theme | null {
-    const theme = localStorage.getItem('ess-theme');
+    const theme = this.storage.getItem('ess-theme');
     if (theme === ThemeEnum.Light || theme === ThemeEnum.Dark) {
         return theme;
     }else{
@@ -44,11 +46,9 @@ export class ThemeService {
   }
 
   private getSystemTheme(): Theme {
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        return ThemeEnum.Dark;
-    }else{
-        return ThemeEnum.Light;
-    }
+    return typeof window.matchMedia === 'function' && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? ThemeEnum.Dark
+      : ThemeEnum.Light;
   }
 }
 

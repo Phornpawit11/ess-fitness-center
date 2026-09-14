@@ -22,4 +22,4 @@ src/app/
       qrcode.routes.ts
 ```
 
-`core/auth` owns authentication models, services, guards, and its related pages. Feature folders own their pages plus related components, services, models, directives, and pipes. Keep only presentation-agnostic, business-agnostic code in `shared`; business-aware reusable code belongs to its business feature.
+`core/auth` owns authentication models, services, guards, and its related pages. This prototype uses a browser-local mock session for email/password, Google, and LINE; it does not connect to an identity provider or backend. Feature folders own their pages plus related components, services, models, directives, and pipes. Keep only presentation-agnostic, business-agnostic code in `shared`; business-aware reusable code belongs to its business feature.

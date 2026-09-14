@@ -1,0 +1,13 @@
+<section>
+  <p class="font-bold text-[var(--color-primary)]">ESS Fitness Center</p>
+  <h1 class="m-0">Profile</h1>
+  <p class="text-[var(--color-text-muted)]">Manage your membership and training details.</p>
+  @if (authStore.user(); as user) {
+    <dl class="mt-8 grid gap-4 border-y border-[var(--color-border)] py-5">
+      <div><dt class="text-sm text-[var(--color-text-muted)]">Name</dt><dd class="m-0 font-semibold">{{ user.displayName }}</dd></div>
+      <div><dt class="text-sm text-[var(--color-text-muted)]">Email</dt><dd class="m-0 font-semibold">{{ user.email }}</dd></div>
+      <div><dt class="text-sm text-[var(--color-text-muted)]">Sign-in method</dt><dd class="m-0 font-semibold capitalize">{{ user.provider }}</dd></div>
+    </dl>
+    <button class="mt-6 min-h-11 border border-[var(--color-border)] px-4 font-semibold" type="button" (click)="signOut()">Sign out</button>
+  }
+</section>

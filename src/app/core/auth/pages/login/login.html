@@ -1,0 +1,35 @@
+<main class="mx-auto grid min-h-dvh max-w-md content-center p-6 text-[var(--color-text)]">
+    <section class="border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm">
+        <p class="mb-2 font-bold text-[var(--color-primary)]">ESS Fitness Center</p>
+        <h1 class="m-0 text-3xl font-bold">Sign in</h1>
+        <p class="mt-2 text-[var(--color-text-muted)]">Access your membership account.</p>
+        <form class="mt-8 grid gap-4" [formGroup]="form" (ngSubmit)="signInWithEmail()">
+            <label class="grid gap-1.5 text-sm font-semibold">Email<input
+                    class="min-h-11 border border-[var(--color-border)] bg-transparent px-3 text-base font-normal outline-none focus:border-[var(--color-primary)]"
+                    type="email" formControlName="email" autocomplete="email" /></label>
+            @if (form.controls.email.touched && form.controls.email.invalid) { <p class="m-0 text-sm text-red-600">Enter
+                a valid email address.</p> }
+            <label class="grid gap-1.5 text-sm font-semibold">Password<input
+                    class="min-h-11 border border-[var(--color-border)] bg-transparent px-3 text-base font-normal outline-none focus:border-[var(--color-primary)]"
+                    type="password" formControlName="password" autocomplete="current-password" /></label>
+            @if (form.controls.password.touched && form.controls.password.invalid) { <p
+                class="m-0 text-sm text-red-600">Password must contain at least 6 characters.</p> }
+            @if (error()) { <p class="m-0 text-sm text-red-600">{{ error() }}</p> }
+            <button
+                class="min-h-11 bg-[var(--color-primary)] px-4 font-semibold text-[var(--color-primary-on)] disabled:cursor-not-allowed disabled:opacity-50"
+                type="submit" [disabled]="isSubmitting()">Sign in with email</button>
+        </form>
+        <div
+            class="my-6 flex items-center gap-3 text-xs text-[var(--color-text-muted)] before:h-px before:flex-1 before:bg-[var(--color-border)] after:h-px after:flex-1 after:bg-[var(--color-border)]">
+            OR</div>
+        <div class="grid gap-3">
+            <button class="min-h-11 border border-[var(--color-border)] px-4 font-semibold" type="button"
+                (click)="signInWithProvider('google')">Continue with Google</button>
+            <button class="min-h-11 border border-[var(--color-border)] px-4 font-semibold" type="button"
+                (click)="signInWithProvider('line')">Continue with LINE</button>
+        </div>
+        <div class="mt-6 flex justify-between text-sm"><a class="text-[var(--color-primary)]"
+                routerLink="/auth/password-recovery">Forgot password?</a><a class="text-[var(--color-primary)]"
+                routerLink="/auth/register">Create account</a></div>
+    </section>
+</main>
